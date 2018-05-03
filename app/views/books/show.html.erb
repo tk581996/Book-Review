@@ -8,9 +8,21 @@
 			<h2 class="book-title"><%= @book.title %></h2>
 			<h3 class="book-author"><span>Author : </span><%= @book.author %></h3>
 			<h4><span>Category : </span> <%= @book.category.name %></h4>
+			<p><%= @book.created_at.strftime("%b %d, %Y") %></p>
 			<h2 class="avg-rating"></h2>
 			<div class="average-review-rating" data-score=<%= @average_review %>></div>
 			<span class="number-of-reviews">Based on <%= @book.reviews.count %> review</span>
+
+			<p></p>
+			<div class="btn-group">
+			  <button type="button" class="btn btn-custom2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			    Buy Now <span class="caret"></span>
+			  </button>
+			  <ul class="dropdown-menu">
+			    <li><a href="<%= @book.linkbuy %>"> Amazon </a></li>
+			  </ul>
+			</div>
+
 			<p class="book-desc"><%= @book.description %></p>
 			<div class="links btn-group">
 				<%= link_to "Back", root_path, class: "btn btn-custom" %>
@@ -21,6 +33,7 @@
 					<%= link_to "Delete", book_path(@book), class: "btn btn-custom" , method: :delete, data: { confirm: "Are you sure?"} %>
 					<% end %>
 				<% end %>
+				
 			</div>
 		</div>
 	</div>
