@@ -4,5 +4,11 @@ Rails.application.routes.draw do
 	resources :books do
 		resources :reviews
 	end
+	resources :notifications do
+		collection do
+			post :mark_as_read
+		end
+	end
+
 	root 'books#index'
 end

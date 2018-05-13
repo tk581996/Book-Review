@@ -2,7 +2,7 @@ class ReviewsController < ApplicationController
 	before_action :find_book
 	before_action :find_review, only: [:edit, :update, :destroy]
 	before_action :authenticate_user!, only: [:new, :edit] #show before .. must log in
-	
+
 
 	def new
 		@review = Review.new
@@ -13,6 +13,10 @@ class ReviewsController < ApplicationController
 		@review.book_id = @book.id 
 		@review.user_id = current_user.id
 		if @review.save
+			(@book.users.uniq - [current_user]).each do |user|
+			    Notification.create(recipient: user, actor: current_user, action: "posted", notifiable: @review)
+			end
+
 			redirect_to book_path(@book)
 		else
 			render 'new'

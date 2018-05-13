@@ -5,7 +5,11 @@
 
 	<div class="col-md-8">
 		<div class="book-info">
+			<% if current_user.admin == true %>
+				<h3 style="height: 70px">You’re using account <%= current_user.email %> as Book Review's Admin to log in.</h3>
+			<% else %>
 			<h3 style="height: 70px">You’re using <%= current_user.email %> to log in — this is also where we send newsletters, notifications and all other emails.</h3>
+			<% end %>
 			<h3>Email</h3>
 			<p style="height: 30px"><%= current_user.email %></p>
 			<h4><%= link_to "Change your password", edit_user_registration_path %></h4>

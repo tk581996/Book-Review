@@ -9,4 +9,7 @@
 			</div>
 		<% end %>
 	<% end %>
+	<% if user_signed_in? && current_user.admin == true %>
+			<%= link_to "Delete", book_path(@book), class: "btn btn-custom" , method: :delete, data: { confirm: "Are you sure?"} %>
+	<% end %>
 </div>
